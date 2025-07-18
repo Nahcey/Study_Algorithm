@@ -1,14 +1,18 @@
-# 버블 정렬 알고리즘 구현하기
+# 버블 정렬 알고리즘 구현하기(알고리즘의 개선2)
 
 from typing import MutableSequence
 
 def bubble_sort(a: MutableSequence) -> None:
-    """버블 정렬"""
+    """버블 정렬(스캔 범위를 제한)"""
     n = len(a)
-    for i in range(n-1):
-        for j in range(n-1,i,-1):
-            if a[j - 1] > a[j]:
-                a[j - 1], a[j] = a[j], a[j - 1]
+    k = 0
+    while k < n-1:
+        last = n-1
+        for j in range(n-1, k, -1):
+            if a[j-1] > a[j]:
+                a[j - 1], a[j] = a[j], a[j-1]
+                last = j
+        k = last
 
 if __name__ == '__main__':
     print('버블 정렬 수행합니다.')
@@ -23,4 +27,3 @@ if __name__ == '__main__':
     print('오름차순으로 정렬했습니다.')
     for i in range(num):
         print(f'x[{i}] = {x[i]}')
- 
